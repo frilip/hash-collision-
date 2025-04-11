@@ -1,4 +1,3 @@
-// SHA2 test program
 #include "md5.h"
 #include <iostream> // for std::cout only, not needed for hashing library
 #include <string>
@@ -48,7 +47,7 @@ int main()
 
 
     string x,y;
-    int char_amount = 14;
+    int char_amount = 12;
     tie(x,y) = Floyd(md5, initial, char_amount);
 
     cout << x << endl << y << endl << "------------" << endl;
