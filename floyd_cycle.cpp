@@ -37,6 +37,42 @@ tuple <string, string> Floyd (MD5 md5, string initial, int char_amount){
 
 
 
+tuple <string, string> Brent (MD5 md5, string initial, int char_amount){
+    int power = 1;
+    int lambda = 1;
+    string tortoise = initial;
+    string hare = md5_reduced(md5, initial, char_amount);
+    while (tortoise != hare){
+        if (power == lambda){
+            tortoise = hare;
+            power *= 2;
+            lambda = 0;
+        }
+        hare = md5_reduced(md5, hare, char_amount);
+        lambda++;
+    }
+    tortoise = initial;
+    hare = initial;
+    for (int i=0; i<lambda; i++){
+        hare = md5_reduced(md5, hare, char_amount);
+    }
+    int mu = 0;
+    string tortoise_pre, hare_pre;
+    while (tortoise != hare){
+        tortoise_pre = tortoise;
+        hare_pre = hare;
+        tortoise = md5_reduced(md5, tortoise, char_amount);
+        hare = md5_reduced(md5, hare, char_amount);
+        mu++;
+    }
+    return std::make_tuple(tortoise_pre, hare_pre);
+}
+
+
+
+
+
+
 int main()
 {
     // create a new hashing object
@@ -48,7 +84,7 @@ int main()
 
     string x,y;
     int char_amount = 12;
-    tie(x,y) = Floyd(md5, initial, char_amount);
+    tie(x,y) = Brent(md5, initial, char_amount);
 
     cout << x << endl << y << endl << "------------" << endl;
     cout << md5_reduced(md5, x, char_amount) << endl << md5_reduced(md5, y, char_amount) << endl;
