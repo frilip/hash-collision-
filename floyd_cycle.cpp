@@ -1,7 +1,10 @@
-#include "md5.h"
-#include <iostream> // for std::cout only, not needed for hashing library
+#include "./hash-library/md5.h"
+#include <iostream> 
 #include <string>
 #include <tuple>
+
+// use b smooth numbers
+
 
 using std::string, std::cout, std::endl, std::tuple;
 
@@ -83,8 +86,8 @@ int main()
 
 
     string x,y;
-    int char_amount = 12;
-    tie(x,y) = Brent(md5, initial, char_amount);
+    int char_amount = 13;
+    tie(x,y) = Floyd(md5, initial, char_amount);
 
     cout << x << endl << y << endl << "------------" << endl;
     cout << md5_reduced(md5, x, char_amount) << endl << md5_reduced(md5, y, char_amount) << endl;
